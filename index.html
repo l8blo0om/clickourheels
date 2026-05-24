@@ -1209,6 +1209,52 @@ footer {
   color: var(--rose-gold);
 }
 
+/* ─── CAROUSEL ─── */
+.cr-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+  z-index: 0;
+}
+.cr-slide.active { opacity: 1; z-index: 1; }
+.cr-arrow {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(201,149,108,0.12);
+  border: 1px solid rgba(201,149,108,0.35);
+  color: var(--champagne);
+  font-size: 2.2rem;
+  line-height: 1;
+  width: 50px; height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(10px);
+  transition: background 0.3s, border-color 0.3s;
+}
+.cr-arrow:hover { background: rgba(201,149,108,0.32); border-color: var(--rose-gold); }
+.cr-prev { left: 28px; padding-right: 3px; }
+.cr-next { right: 28px; padding-left: 3px; }
+.cr-dots {
+  position: absolute;
+  bottom: 24px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 10px;
+  z-index: 10;
+}
+.cr-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  border: none;
+}
+.cr-dot.active { background: var(--rose-gold); transform: scale(1.4); }
+
 /* ─── ANIMATIONS: SCROLL REVEAL ─── */
 .reveal {
   opacity: 0;
@@ -1372,6 +1418,30 @@ footer {
     <span class="marquee-item">Galas &amp; Formals</span>
     <span class="marquee-item">Sweet 16s</span>
     <span class="marquee-item">Quinceañeras</span>
+  </div>
+</div>
+
+<!-- ─── PHOTO CAROUSEL ─── -->
+<div id="photoCarousel" style="position:relative;overflow:hidden;height:68vh;min-height:380px;max-height:700px;background:var(--black);">
+
+  <div class="cr-slide active" style="background-image:url('IMG_5182.JPG');background-position:72% center;"></div>
+  <div class="cr-slide" style="background-image:url('IMG_5181.JPG');background-position:72% center;"></div>
+  <div class="cr-slide" style="background-image:url('IMG_5148.JPG');background-position:72% center;"></div>
+  <div class="cr-slide" style="background-image:url('IMG_4767.JPG');background-position:center;"></div>
+  <div class="cr-slide" style="background-image:url('IMG_4766.JPG');background-position:center;"></div>
+
+  <!-- top + bottom fade to black -->
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(8,8,8,0.25) 0%,transparent 20%,transparent 75%,rgba(8,8,8,0.7) 100%);pointer-events:none;z-index:2;"></div>
+
+  <button class="cr-arrow cr-prev" onclick="crMove(-1)">&#8249;</button>
+  <button class="cr-arrow cr-next" onclick="crMove(1)">&#8250;</button>
+
+  <div class="cr-dots">
+    <button class="cr-dot active" onclick="crGo(0)"></button>
+    <button class="cr-dot" onclick="crGo(1)"></button>
+    <button class="cr-dot" onclick="crGo(2)"></button>
+    <button class="cr-dot" onclick="crGo(3)"></button>
+    <button class="cr-dot" onclick="crGo(4)"></button>
   </div>
 </div>
 
@@ -2052,6 +2122,25 @@ function showModel(model) {
     og.style.display = 'none'; da.style.display = 'grid';
     tabD.style.cssText += activeStyle; tabO.style.cssText += inactiveStyle;
   }
+}
+
+// ─── PHOTO CAROUSEL ───
+let crIdx = 0;
+const crSlides = document.querySelectorAll('.cr-slide');
+const crDotEls = document.querySelectorAll('.cr-dot');
+let crTimer = setInterval(() => crMove(1), 5000);
+
+function crGo(n) {
+  crSlides[crIdx].classList.remove('active');
+  crDotEls[crIdx].classList.remove('active');
+  crIdx = ((n % crSlides.length) + crSlides.length) % crSlides.length;
+  crSlides[crIdx].classList.add('active');
+  crDotEls[crIdx].classList.add('active');
+}
+function crMove(dir) {
+  clearInterval(crTimer);
+  crGo(crIdx + dir);
+  crTimer = setInterval(() => crMove(1), 5000);
 }
 
 // ─── NAV SCROLL ───
