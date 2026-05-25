@@ -1273,9 +1273,9 @@ footer {
 /* ─── RESPONSIVE ─── */
 @media (max-width: 900px) {
   #hero { padding-top: calc(var(--promo-h) + var(--nav-h) + 40px); padding-bottom: 40px; min-height: auto; }
-  .mirror-graphic { display: none; }
+  .mirror-graphic { display: none !important; }
   #what { grid-template-columns: 1fr; gap: 40px; }
-  .what-visual { display: none; }
+  .what-visual { display: none !important; }
   #experience { grid-template-columns: 1fr; gap: 40px; }
   .exp-visual { order: -1; }
   .contact-inner { grid-template-columns: 1fr; gap: 40px; }
@@ -1290,10 +1290,10 @@ footer {
 }
 
 @media (max-width: 560px) {
-  /* Promo bar — prevent wrap on narrow phones */
-  :root { --promo-h: 38px; }
-  #promo-bar { padding: 6px 12px; gap: 8px; }
-  #promo-bar span { font-size: 0.62rem; }
+  /* Promo bar — single line on phones */
+  :root { --promo-h: 36px; }
+  #promo-bar { padding: 0 12px; gap: 0; flex-wrap: nowrap; }
+  #promo-bar span { font-size: 0.58rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   #promo-bar a { display: none; }
   /* Hero */
   .hero-h1 { font-size: 2rem; }
