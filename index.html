@@ -205,10 +205,10 @@ body { top: 0 !important; }
   position: relative;
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   overflow: hidden;
-  padding: calc(var(--promo-h) + var(--nav-h) + 20px) 6% 0;
+  padding: calc(var(--promo-h) + var(--nav-h) + 20px) 6% 100px;
 }
 
 /* ── Hero background carousel ── */
@@ -1351,7 +1351,7 @@ footer {
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 900px) {
-  #hero { padding-top: calc(var(--promo-h) + var(--nav-h) + 40px); padding-bottom: 40px; min-height: auto; }
+  #hero { padding-top: calc(var(--promo-h) + var(--nav-h) + 40px); padding-bottom: 60px; min-height: auto; align-items: flex-end; }
   .mirror-graphic { display: none !important; }
   #what { grid-template-columns: 1fr; gap: 40px; }
   .what-visual { display: none !important; }
