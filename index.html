@@ -949,6 +949,25 @@ section { padding: 100px 6%; }
   transition: transform 0.4s ease;
 }
 .vg-item:hover video { transform: scale(1.03); }
+.vg-mute-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 2;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.2s;
+  backdrop-filter: blur(4px);
+}
+.vg-mute-btn:hover { background: rgba(201,149,108,0.7); }
 @media (max-width: 900px) { .vg-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px)  { .vg-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
 
@@ -1567,18 +1586,23 @@ footer {
     <div class="vg-grid">
       <div class="vg-item reveal reveal-delay-1">
         <video src="880c69f2-b02b-4dd1-aab4-69e34983cc6a.mp4" autoplay muted loop playsinline></video>
+        <button class="vg-mute-btn" title="Toggle sound">🔇</button>
       </div>
       <div class="vg-item reveal reveal-delay-2">
         <video src="18b1ad3f-1231-42d2-af8a-30918c988c25.mp4" autoplay muted loop playsinline></video>
+        <button class="vg-mute-btn" title="Toggle sound">🔇</button>
       </div>
       <div class="vg-item reveal reveal-delay-3">
         <video src="87a72384-f319-4791-b6f8-e7ba1c7ac018.mp4" autoplay muted loop playsinline></video>
+        <button class="vg-mute-btn" title="Toggle sound">🔇</button>
       </div>
       <div class="vg-item reveal">
         <video src="d76caf6f-1cdc-459a-87f9-e502f977bfe4.mp4" autoplay muted loop playsinline></video>
+        <button class="vg-mute-btn" title="Toggle sound">🔇</button>
       </div>
       <div class="vg-item reveal reveal-delay-1">
         <video src="577e169f-5b7b-4db7-a3a1-0b5f742fe142.mp4" autoplay muted loop playsinline></video>
+        <button class="vg-mute-btn" title="Toggle sound">🔇</button>
       </div>
     </div>
   </div>
@@ -2393,6 +2417,25 @@ function handleSubmit() {
 <!-- Google Translate (hidden — language picker uses this) -->
 <!-- Calendly widget script -->
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<script>
+// Video mute toggle
+document.querySelectorAll('.vg-mute-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const video = btn.previousElementSibling;
+    if (video.muted) {
+      // Mute all others first
+      document.querySelectorAll('.vg-item video').forEach(v => { v.muted = true; });
+      document.querySelectorAll('.vg-mute-btn').forEach(b => { b.textContent = '🔇'; });
+      // Unmute this one
+      video.muted = false;
+      btn.textContent = '🔊';
+    } else {
+      video.muted = true;
+      btn.textContent = '🔇';
+    }
+  });
+});
+</script>
 
 <div id="google_translate_element" style="display:none;visibility:hidden;"></div>
 <script>
