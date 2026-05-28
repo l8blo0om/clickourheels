@@ -932,29 +932,44 @@ section { padding: 100px 6%; }
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 540px;
+  height: 560px;
   overflow: hidden;
 }
 .vc-slide {
   position: absolute;
-  width: 26%;
-  transition: transform 0.75s cubic-bezier(0.4,0,0.2,1),
-              opacity  0.75s ease;
+  width: 30%;
+  transition: transform 0.7s cubic-bezier(0.4,0,0.2,1),
+              opacity  0.7s ease;
   z-index: 1;
+  pointer-events: none;
 }
 .vc-slide video {
   width: 100%;
   aspect-ratio: 9/16;
   object-fit: cover;
-  border-radius: 16px;
+  border-radius: 18px;
   border: 1px solid var(--border);
   display: block;
 }
-.vc-slide.vc-active  { transform: translateX(0)    scale(1);    opacity: 1;   z-index: 3; }
-.vc-slide.vc-prev    { transform: translateX(-88%) scale(0.80); opacity: 0.55; z-index: 2; }
-.vc-slide.vc-next    { transform: translateX(88%)  scale(0.80); opacity: 0.55; z-index: 2; }
-.vc-slide.vc-far-l   { transform: translateX(-155%) scale(0.65); opacity: 0;   z-index: 1; }
-.vc-slide.vc-far-r   { transform: translateX(155%)  scale(0.65); opacity: 0;   z-index: 1; }
+/* Only center slide fully visible; sides peek in ~12% */
+.vc-slide.vc-active {
+  transform: translateX(0) scale(1);
+  opacity: 1;
+  z-index: 3;
+  pointer-events: auto;
+}
+.vc-slide.vc-prev {
+  transform: translateX(-78%) scale(0.78);
+  opacity: 0.18;
+  z-index: 2;
+}
+.vc-slide.vc-next {
+  transform: translateX(78%) scale(0.78);
+  opacity: 0.18;
+  z-index: 2;
+}
+.vc-slide.vc-far-l,
+.vc-slide.vc-far-r { transform: translateX(0) scale(0.6); opacity: 0; z-index: 1; }
 /* Dots */
 .vc-dots {
   display: flex;
@@ -970,6 +985,17 @@ section { padding: 100px 6%; }
   cursor: pointer;
 }
 .vc-dot.active { background: var(--rose-gold); transform: scale(1.35); }
+@media (max-width: 900px) {
+  .vc-wrapper { height: 460px; }
+  .vc-slide { width: 52%; }
+  .vc-slide.vc-prev { transform: translateX(-82%) scale(0.8); opacity: 0.12; }
+  .vc-slide.vc-next { transform: translateX(82%)  scale(0.8); opacity: 0.12; }
+}
+@media (max-width: 560px) {
+  .vc-wrapper { height: 380px; }
+  .vc-slide { width: 70%; }
+  .vc-slide.vc-prev, .vc-slide.vc-next { opacity: 0.08; }
+}
 /* Spotify floating player */
 .sp-player {
   position: fixed;
@@ -2476,10 +2502,19 @@ function handleSubmit() {
 // ─── VIDEO CAROUSEL ───
 (function() {
   const slides = Array.from(document.querySelectorAll('.vc-slide'));
+  const videos = slides.map(s => s.querySelector('video'));
   const dotsEl = document.getElementById('vcDots');
   const n = slides.length;
   let cur = 0;
   let timer;
+
+  // Force all videos to play (muted autoplay requires explicit play() in some browsers)
+  function ensurePlaying() {
+    videos.forEach(v => {
+      v.muted = true;
+      if (v.paused) v.play().catch(() => {});
+    });
+  }
 
   // Build dots
   slides.forEach((_, i) => {
@@ -2505,6 +2540,7 @@ function handleSubmit() {
     document.querySelectorAll('.vc-dot').forEach((d, i) => {
       d.classList.toggle('active', i === cur);
     });
+    ensurePlaying();
   }
 
   function goTo(idx) {
@@ -2515,11 +2551,14 @@ function handleSubmit() {
 
   function resetTimer() {
     clearInterval(timer);
-    timer = setInterval(() => goTo(cur + 1), 4500);
+    timer = setInterval(() => goTo(cur + 1), 5000);
   }
 
   update();
   resetTimer();
+
+  // Re-check on first user interaction (unblocks autoplay in strict browsers)
+  document.addEventListener('click', ensurePlaying, { once: true });
 })();
 
 // ─── SPOTIFY TOGGLE ───
