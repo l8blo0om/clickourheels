@@ -1003,9 +1003,9 @@ section { padding: 100px 6%; }
   left: 24px;
   z-index: 9999;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: flex-start;
-  gap: 0;
+  gap: 10px;
 }
 .sp-toggle {
   background: #1DB954;
@@ -1014,26 +1014,26 @@ section { padding: 100px 6%; }
   color: #fff;
   font-size: 13px;
   font-weight: 600;
-  padding: 8px 16px;
+  padding: 10px 20px;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 7px;
   box-shadow: 0 4px 18px rgba(0,0,0,0.4);
-  transition: transform 0.2s;
+  transition: transform 0.2s, background 0.2s;
   letter-spacing: 0.02em;
-  margin-bottom: 8px;
 }
-.sp-toggle:hover { transform: scale(1.05); }
-.sp-toggle svg { width: 18px; height: 18px; fill: white; }
+.sp-toggle:hover { transform: scale(1.05); background: #17a349; }
+.sp-toggle svg { width: 18px; height: 18px; fill: white; flex-shrink: 0; }
 .sp-embed {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(0,0,0,0.55);
   transform-origin: bottom left;
   transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease;
+  max-width: calc(100vw - 48px);
 }
-.sp-embed.hidden { transform: scale(0.85) translateY(10px); opacity: 0; pointer-events: none; }
+.sp-embed.hidden { transform: scale(0.9) translateY(12px); opacity: 0; pointer-events: none; }
 @media (max-width: 900px) {
   .vc-wrapper { height: 420px; }
   .vc-slide { width: 54%; }
@@ -1569,8 +1569,8 @@ footer {
   <a href="#" class="nav-logo" style="font-family:'Dancing Script',cursive;font-size:1.65rem;color:var(--rose-gold);text-decoration:none;letter-spacing:0.02em;">Click Our Heels</a>
   <ul class="nav-links">
     <li><a href="#what">The Experience</a></li>
-    <li><a href="#events">Events</a></li>
     <li><a href="#packages">Packages</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#contact" class="nav-cta">Book Now</a></li>
   </ul>
@@ -1598,8 +1598,8 @@ footer {
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" onclick="toggleMenu()">✕</button>
   <a href="#what" onclick="toggleMenu()">The Experience</a>
-  <a href="#events" onclick="toggleMenu()">Events</a>
   <a href="#packages" onclick="toggleMenu()">Packages</a>
+  <a href="#testimonials" onclick="toggleMenu()">Reviews</a>
   <a href="#faq" onclick="toggleMenu()">FAQ</a>
   <a href="#contact" onclick="toggleMenu()">Book Now</a>
 </div>
@@ -1636,23 +1636,6 @@ footer {
   <div class="hero-scroll"><span>Scroll</span></div>
 </section>
 
-<!-- ─── STATS ─── -->
-<section id="stats" style="padding:60px 6%;background:var(--deep);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
-  <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:40px;text-align:center;">
-    <div class="reveal">
-      <div style="font-family:'Playfair Display',serif;font-size:3.2rem;font-weight:900;color:var(--rose-gold);line-height:1;">77%</div>
-      <div style="font-size:0.78rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--champagne);margin-top:10px;opacity:0.8;">of dancers wish they had better photos from events</div>
-    </div>
-    <div class="reveal reveal-delay-1">
-      <div style="font-family:'Playfair Display',serif;font-size:3.2rem;font-weight:900;color:var(--rose-gold);line-height:1;">3×</div>
-      <div style="font-size:0.78rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--champagne);margin-top:10px;opacity:0.8;">more social shares from mirror booth vs. standard photo</div>
-    </div>
-    <div class="reveal reveal-delay-2">
-      <div style="font-family:'Playfair Display',serif;font-size:3.2rem;font-weight:900;color:var(--rose-gold);line-height:1;">100%</div>
-      <div style="font-size:0.78rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--champagne);margin-top:10px;opacity:0.8;">of dancers care deeply about how they look in costume</div>
-    </div>
-  </div>
-</section>
 
 <!-- ─── VIDEO GALLERY ─── -->
 <section id="videos" style="padding:80px 6% 100px;background:var(--deep);">
@@ -1695,29 +1678,6 @@ footer {
   </div>
 </div>
 
-<!-- ─── PHOTO CAROUSEL ─── -->
-<div id="photoCarousel" style="position:relative;overflow:hidden;height:68vh;min-height:380px;max-height:700px;background:var(--black);">
-
-  <div class="cr-slide active" style="background-image:url('IMG_4533.JPG');background-position:center;"></div>
-  <div class="cr-slide" style="background-image:url('IMG_4532.JPG');background-position:center;"></div>
-  <div class="cr-slide" style="background-image:url('IMG_4767.JPG');background-position:center;"></div>
-  <div class="cr-slide" style="background-image:url('IMG_4766.JPG');background-position:center;"></div>
-  <div class="cr-slide" style="background-image:url('IMG_4526.JPG');background-position:center;"></div>
-
-  <!-- top + bottom fade to black -->
-  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(8,8,8,0.25) 0%,transparent 20%,transparent 75%,rgba(8,8,8,0.7) 100%);pointer-events:none;z-index:2;"></div>
-
-  <button class="cr-arrow cr-prev" onclick="crMove(-1)">&#8249;</button>
-  <button class="cr-arrow cr-next" onclick="crMove(1)">&#8250;</button>
-
-  <div class="cr-dots">
-    <button class="cr-dot active" onclick="crGo(0)"></button>
-    <button class="cr-dot" onclick="crGo(1)"></button>
-    <button class="cr-dot" onclick="crGo(2)"></button>
-    <button class="cr-dot" onclick="crGo(3)"></button>
-    <button class="cr-dot" onclick="crGo(4)"></button>
-  </div>
-</div>
 
 <!-- ─── WHAT IS ─── -->
 <section id="what">
@@ -1749,104 +1709,7 @@ footer {
   </div>
 </section>
 
-<!-- ─── EVENTS ─── -->
-<section id="events">
-  <div class="text-center reveal">
-    <p class="section-label">We Show Up For</p>
-    <h2 class="section-h2">Every Scene.<br><em>Every Style.</em></h2>
-    <p class="section-lead">From the salsa floor to the ballroom stage to the recital lobby — we show up where Charlotte dances.</p>
-  </div>
 
-  <div class="events-grid">
-    <div class="event-card reveal reveal-delay-1">
-      <span class="event-icon">💃</span>
-      <div class="event-title">Salsa &amp; Bachata Socials</div>
-      <p class="event-desc">Friday night socials, Latin weekenders, bachata brunches. The community posts everything — give them something worth posting.</p>
-    </div>
-    <div class="event-card reveal reveal-delay-2">
-      <span class="event-icon">🏆</span>
-      <div class="event-title">Ballroom Competitions</div>
-      <p class="event-desc">The official photographer has a two-week waitlist and a $35 print. We're there on the floor with instant digital delivery. No watermarks. No waiting.</p>
-    </div>
-    <div class="event-card reveal reveal-delay-3">
-      <span class="event-icon">🎭</span>
-      <div class="event-title">Recitals &amp; Showcases</div>
-      <p class="event-desc">Studio recitals, student showcases, end-of-season performances. Parents finally get photos they actually love.</p>
-    </div>
-    <div class="event-card reveal reveal-delay-4">
-      <span class="event-icon">👑</span>
-      <div class="event-title">Galas &amp; Formals</div>
-      <p class="event-desc">Ball gowns deserve better than a phone selfie. Mirror booths were made for this moment — and this community knows how to dress.</p>
-    </div>
-    <div class="event-card reveal reveal-delay-1">
-      <span class="event-icon">🎉</span>
-      <div class="event-title">Quinceañeras &amp; Sweet 16s</div>
-      <p class="event-desc">When the guest of honor has been dancing her whole life, the photo booth should match that energy. Completely.</p>
-    </div>
-    <div class="event-card reveal reveal-delay-2">
-      <span class="event-icon">🌟</span>
-      <div class="event-title">Studio Celebrations</div>
-      <p class="event-desc">Grand openings, anniversaries, team banquets. Build community, create content, give your dancers something to share.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ─── EXPERIENCE ─── -->
-<section id="experience">
-  <div class="exp-content">
-    <p class="section-label reveal">Why We're Different</p>
-    <h2 class="section-h2 reveal">Built for the<br><em>Dance Community</em></h2>
-    <div class="exp-list">
-      <div class="exp-item reveal reveal-delay-1">
-        <div class="exp-num">01</div>
-        <div class="exp-body">
-          <div class="exp-title">We Know Dance Events</div>
-          <p class="exp-desc">Tight venue windows, costume changes, large groups, excited kids — we've seen it all. We set up fast and work around your schedule, not the other way around.</p>
-        </div>
-      </div>
-      <div class="exp-item reveal reveal-delay-2">
-        <div class="exp-num">02</div>
-        <div class="exp-body">
-          <div class="exp-title">Custom Studio Branding</div>
-          <p class="exp-desc">Every print and digital share features your studio's name, logo, and event details. Your brand is front and center — a keepsake that keeps your studio visible long after the night ends.</p>
-        </div>
-      </div>
-      <div class="exp-item reveal reveal-delay-3">
-        <div class="exp-num">03</div>
-        <div class="exp-body">
-          <div class="exp-title">Professional On-Site Attendant</div>
-          <p class="exp-desc">We never just drop and run. An experienced attendant manages the booth from setup to strike, keeping the line moving and the energy high all night.</p>
-        </div>
-      </div>
-      <div class="exp-item reveal reveal-delay-4">
-        <div class="exp-num">04</div>
-        <div class="exp-body">
-          <div class="exp-title">Online Gallery &amp; Digital Archive</div>
-          <p class="exp-desc">Every photo is uploaded to a private gallery within 24 hours. Share the link with your studio families and let them relive the magic.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="exp-visual reveal">
-    <div class="exp-stat">
-      <div class="exp-stat-num">100+</div>
-      <div class="exp-stat-label">Events Captured</div>
-    </div>
-    <div class="exp-stat">
-      <div class="exp-stat-num">500+</div>
-      <div class="exp-stat-label">Prints Per Night</div>
-    </div>
-    <div class="exp-stat">
-      <div class="exp-stat-num">Charlotte</div>
-      <div class="exp-stat-label">& Surrounding Areas</div>
-    </div>
-    <div class="exp-stat highlight">
-      <div class="exp-stat-num">💃</div>
-      <div class="exp-stat-label">Dance Community Focused</div>
-    </div>
-  </div>
-</section>
 
 <!-- ─── ABOUT ─── -->
 <section id="about" style="background: var(--deep);">
@@ -2253,34 +2116,6 @@ footer {
   </div>
 </section>
 
-<!-- ─── STUDIO PARTNER PROGRAM ─── -->
-<section style="background:linear-gradient(135deg,rgba(192,52,122,0.08),rgba(201,149,108,0.06));padding:80px 6%;text-align:center;">
-  <div style="max-width:700px;margin:0 auto;">
-    <p class="section-label reveal" style="justify-content:center;">For Studio Owners</p>
-    <h2 class="section-h2 reveal">Partner With Us.<br><em>Reward Your Dancers.</em></h2>
-    <p class="section-lead reveal" style="margin:0 auto 40px;">
-      Join the Click Our Heels studio partner program and give your students something they'll actually use. We provide your studio with $9.99 coupon cards to distribute however you like — recital programs, welcome packets, competition prep bags. Dancers redeem them at any event where we're activated.
-    </p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;margin-bottom:40px;" class="reveal">
-      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:28px 20px;text-align:center;">
-        <div style="font-size:2rem;margin-bottom:12px;">🎟️</div>
-        <div style="font-size:0.8rem;font-weight:700;color:var(--white);margin-bottom:6px;">Free Coupons</div>
-        <div style="font-size:0.72rem;color:var(--mid);line-height:1.5;">We print and ship $9.99 coupon cards directly to your studio</div>
-      </div>
-      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:28px 20px;text-align:center;">
-        <div style="font-size:2rem;margin-bottom:12px;">📲</div>
-        <div style="font-size:0.8rem;font-weight:700;color:var(--white);margin-bottom:6px;">Digital Too</div>
-        <div style="font-size:0.72rem;color:var(--mid);line-height:1.5;">Share a digital coupon code through your studio app or newsletter</div>
-      </div>
-      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:28px 20px;text-align:center;">
-        <div style="font-size:2rem;margin-bottom:12px;">💰</div>
-        <div style="font-size:0.8rem;font-weight:700;color:var(--white);margin-bottom:6px;">No Cost to You</div>
-        <div style="font-size:0.72rem;color:var(--mid);line-height:1.5;">Zero cost to the studio — your students get a deal, we get a first-time customer</div>
-      </div>
-    </div>
-    <a href="#contact" class="btn-primary reveal" style="display:inline-flex;">✉️ Become a Partner Studio</a>
-  </div>
-</section>
 
 <!-- ─── CONTACT ─── -->
 <section id="contact">
