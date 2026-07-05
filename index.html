@@ -996,16 +996,12 @@ section { padding: 100px 6%; }
   .vc-slide { width: 70%; }
   .vc-slide.vc-prev, .vc-slide.vc-next { opacity: 0.08; }
 }
-/* Spotify floating player — small brand-colored toggle, tucked bottom-right */
+/* Music player — single play/pause button, no album art or track info */
 .sp-player {
   position: fixed;
   bottom: 20px;
   right: 20px;
   z-index: 9999;
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: flex-end;
-  gap: 12px;
 }
 .sp-toggle {
   background: linear-gradient(135deg, var(--rose-gold), var(--fuchsia));
@@ -1022,18 +1018,10 @@ section { padding: 100px 6%; }
   flex-shrink: 0;
 }
 .sp-toggle:hover { transform: scale(1.08); }
-.sp-toggle svg { width: 20px; height: 20px; fill: none; stroke: white; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
-.sp-embed {
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.55);
-  border: 1px solid var(--border);
-  transform-origin: bottom right;
-  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease;
-  max-width: calc(100vw - 40px);
-  width: 300px;
-}
-.sp-embed.hidden { transform: scale(0.9) translateY(10px); opacity: 0; pointer-events: none; position: absolute; bottom: 60px; right: 0; }
+.sp-toggle svg { width: 18px; height: 18px; fill: white; stroke: none; flex-shrink: 0; }
+.sp-toggle .icon-pause { display: none; }
+.sp-toggle.playing .icon-play { display: none; }
+.sp-toggle.playing .icon-pause { display: block; }
 @media (max-width: 900px) {
   .vc-wrapper { height: 420px; }
   .vc-slide { width: 54%; }
@@ -1041,7 +1029,6 @@ section { padding: 100px 6%; }
   .vc-slide.vc-next  { transform: translateX(90%)  scale(0.78); opacity: 0.5; }
   .vc-slide.vc-far-l, .vc-slide.vc-far-r { opacity: 0; }
   .sp-player { bottom: 16px; right: 16px; }
-  .sp-embed { width: 260px; }
 }
 @media (max-width: 560px) {
   .vc-wrapper { height: 370px; }
@@ -2312,21 +2299,15 @@ function handleSubmit() {
 <!-- Calendly widget script -->
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
-<!-- ─── SPOTIFY FLOATING PLAYER ─── -->
+<!-- ─── MUSIC PLAYER (play/pause only, no album art or titles) ─── -->
 <div class="sp-player" id="spPlayer">
-  <button class="sp-toggle" id="spToggle" onclick="toggleSpotify()" title="Play the vibe" aria-label="Open music player">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+  <button class="sp-toggle" id="spToggle" onclick="toggleMusic()" title="Play music" aria-label="Play or pause background music">
+    <svg class="icon-play" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+    <svg class="icon-pause" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
   </button>
-  <div class="sp-embed hidden" id="spEmbed">
-    <iframe style="border-radius:12px;display:block;"
-      src="https://open.spotify.com/embed/album/3CGev6tR6bTQakJfLLsTHV?utm_source=generator&theme=0"
-      width="100%" height="352"
-      frameBorder="0"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      loading="lazy">
-    </iframe>
-  </div>
 </div>
+<div id="spotify-embed-holder" style="position:fixed;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;bottom:0;right:0;"></div>
+<script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
 
 <script>
 // ─── VIDEO CAROUSEL ───
@@ -2391,9 +2372,27 @@ function handleSubmit() {
   document.addEventListener('click', ensurePlaying, { once: true });
 })();
 
-// ─── SPOTIFY TOGGLE ───
-function toggleSpotify() {
-  document.getElementById('spEmbed').classList.toggle('hidden');
+// ─── MUSIC PLAYER (Spotify IFrame API, hidden UI, custom play/pause button) ───
+let spotifyController = null;
+let spotifyReady = false;
+let wantsPlayOnReady = false;
+
+window.onSpotifyIframeApiReady = (IFrameAPI) => {
+  const holder = document.getElementById('spotify-embed-holder');
+  const options = { uri: 'spotify:album:2xwaBxMy2sz26E00M4u55X', width: '1', height: '1' };
+  IFrameAPI.createController(holder, options, (EmbedController) => {
+    spotifyController = EmbedController;
+    spotifyReady = true;
+    EmbedController.addListener('playback_update', e => {
+      document.getElementById('spToggle').classList.toggle('playing', !e.data.isPaused);
+    });
+    if (wantsPlayOnReady) { EmbedController.play(); wantsPlayOnReady = false; }
+  });
+};
+
+function toggleMusic() {
+  if (!spotifyReady) { wantsPlayOnReady = true; return; }
+  spotifyController.togglePlay();
 }
 </script>
 
