@@ -996,51 +996,52 @@ section { padding: 100px 6%; }
   .vc-slide { width: 70%; }
   .vc-slide.vc-prev, .vc-slide.vc-next { opacity: 0.08; }
 }
-/* Spotify floating player */
+/* Spotify floating player — small brand-colored toggle, tucked bottom-right */
 .sp-player {
   position: fixed;
-  bottom: 24px;
-  left: 24px;
+  bottom: 20px;
+  right: 20px;
   z-index: 9999;
   display: flex;
   flex-direction: column-reverse;
-  align-items: flex-start;
-  gap: 10px;
+  align-items: flex-end;
+  gap: 12px;
 }
 .sp-toggle {
-  background: #1DB954;
+  background: linear-gradient(135deg, var(--rose-gold), var(--fuchsia));
   border: none;
-  border-radius: 50px;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 10px 20px;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 7px;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.4);
-  transition: transform 0.2s, background 0.2s;
-  letter-spacing: 0.02em;
+  justify-content: center;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.45);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
 }
-.sp-toggle:hover { transform: scale(1.05); background: #17a349; }
-.sp-toggle svg { width: 18px; height: 18px; fill: white; flex-shrink: 0; }
+.sp-toggle:hover { transform: scale(1.08); }
+.sp-toggle svg { width: 20px; height: 20px; fill: none; stroke: white; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
 .sp-embed {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(0,0,0,0.55);
-  transform-origin: bottom left;
-  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease;
-  max-width: calc(100vw - 48px);
+  border: 1px solid var(--border);
+  transform-origin: bottom right;
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease;
+  max-width: calc(100vw - 40px);
+  width: 300px;
 }
-.sp-embed.hidden { transform: scale(0.9) translateY(12px); opacity: 0; pointer-events: none; }
+.sp-embed.hidden { transform: scale(0.9) translateY(10px); opacity: 0; pointer-events: none; position: absolute; bottom: 60px; right: 0; }
 @media (max-width: 900px) {
   .vc-wrapper { height: 420px; }
   .vc-slide { width: 54%; }
   .vc-slide.vc-prev  { transform: translateX(-90%) scale(0.78); opacity: 0.5; }
   .vc-slide.vc-next  { transform: translateX(90%)  scale(0.78); opacity: 0.5; }
   .vc-slide.vc-far-l, .vc-slide.vc-far-r { opacity: 0; }
-  .sp-player { bottom: 16px; left: 16px; }
+  .sp-player { bottom: 16px; right: 16px; }
+  .sp-embed { width: 260px; }
 }
 @media (max-width: 560px) {
   .vc-wrapper { height: 370px; }
@@ -1488,8 +1489,8 @@ footer {
 @media (max-width: 560px) {
   /* Promo bar — single line on phones */
   :root { --promo-h: 36px; }
-  #promo-bar { padding: 0 12px; gap: 0; flex-wrap: nowrap; }
-  #promo-bar span { font-size: 0.58rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #promo-bar { padding: 0 34px 0 12px; gap: 0; flex-wrap: nowrap; justify-content: flex-start; }
+  #promo-bar span { font-size: 0.58rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 8px; }
   #promo-bar a { display: none; }
   /* Hero */
   .hero-h1 { font-size: 2rem; }
@@ -1727,7 +1728,7 @@ footer {
         overflow:hidden;
         position:relative;
       ">
-        <img src="IMG_4767.JPG" alt="Click Our Heels" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
+        <img src="IMG_4767.JPG" alt="Click Our Heels" style="width:100%;height:100%;object-fit:cover;object-position:8% center;border-radius:inherit;">
         <!-- Decorative corner -->
         <div style="position:absolute;top:16px;right:16px;width:40px;height:40px;border-top:2px solid var(--rose-gold);border-right:2px solid var(--rose-gold);border-radius:0 4px 0 0;opacity:0.5;"></div>
         <div style="position:absolute;bottom:16px;left:16px;width:40px;height:40px;border-bottom:2px solid var(--rose-gold);border-left:2px solid var(--rose-gold);border-radius:0 0 0 4px;opacity:0.5;"></div>
@@ -1750,14 +1751,8 @@ footer {
     <div class="reveal reveal-delay-2">
       <p class="section-label">The Story Behind the Booth</p>
       <h2 class="section-h2">Created by a Dancer,<br><em>For This Community</em></h2>
-      <p style="font-size:0.95rem;line-height:1.8;color:var(--champagne);opacity:0.85;margin-bottom:20px;">
-        Click Our Heels was built by dancers who got tired of watching incredible moments disappear. The costume. The pose. The look in someone's eyes right after a perfect turn. These things deserve to be captured — not by an overpriced event photographer with a two-week delay and a watermarked proof sheet.
-      </p>
-      <p style="font-size:0.95rem;line-height:1.8;color:var(--champagne);opacity:0.85;margin-bottom:20px;">
-        Charlotte's dance scene runs deep — salsa socials, ballroom competitions, recitals, galas, Latin weekenders. It's a community that lives on the floor and deserves a photo experience that actually matches the energy in the room.
-      </p>
       <p style="font-size:0.95rem;line-height:1.8;color:var(--champagne);opacity:0.85;margin-bottom:36px;">
-        So we built one. A full-length mirror booth that moves with the community — showing up at events, partnering with studios, and making sure every dancer walks away with something they're proud to share.
+        Click Our Heels was built by dancers who got tired of watching incredible moments disappear — the costume, the pose, the look right after a perfect turn. So we built a full-length mirror booth that moves with Charlotte's dance community, showing up at events and making sure every dancer walks away with something they're proud to share.
       </p>
       <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
         <a href="#contact" class="btn-primary">Book Your Event</a>
@@ -2318,14 +2313,13 @@ function handleSubmit() {
 
 <!-- ─── SPOTIFY FLOATING PLAYER ─── -->
 <div class="sp-player" id="spPlayer">
-  <button class="sp-toggle" id="spToggle" onclick="toggleSpotify()">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-    🎵 The Vibe
+  <button class="sp-toggle" id="spToggle" onclick="toggleSpotify()" title="Play the vibe" aria-label="Open music player">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
   </button>
   <div class="sp-embed hidden" id="spEmbed">
-    <iframe style="border-radius:12px"
+    <iframe style="border-radius:12px;display:block;"
       src="https://open.spotify.com/embed/album/3CGev6tR6bTQakJfLLsTHV?utm_source=generator&theme=0"
-      width="300" height="380"
+      width="100%" height="352"
       frameBorder="0"
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
       loading="lazy">
