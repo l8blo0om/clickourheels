@@ -11,6 +11,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Montserrat:wght@300;400;500;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
+/* ─── ANIMATED HUE (scoped to the brand's rose-gold ↔ fuchsia ↔ gold range, not a full rainbow) ─── */
+@property --hue {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+:root { --hue: 0; }
+@keyframes huecycle { to { --hue: 360; } }
+
 /* ─── TOKENS ─── */
 :root {
   --black:      #080808;
@@ -1004,7 +1013,11 @@ section { padding: 100px 6%; }
   z-index: 9999;
 }
 .sp-toggle {
-  background: linear-gradient(135deg, var(--rose-gold), var(--fuchsia));
+  /* Hue drifts within the brand's warm range only — rose-gold (~25°) through fuchsia (~330°) — never into green/blue/cyan */
+  background: linear-gradient(135deg,
+    hsl(calc(25 + (var(--hue) * 0.25)), 55%, 62%),
+    hsl(calc(330 + (var(--hue) * 0.1)), 60%, 48%));
+  animation: huecycle 22s linear infinite;
   border: none;
   border-radius: 50%;
   width: 48px;
