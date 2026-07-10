@@ -278,7 +278,7 @@ body { top: 0 !important; }
   animation: hero-zoom 16s ease-out forwards;
 }
 /* Only the first slide is visible — the girl at the mirror */
-.hero-slide:nth-child(1) { background-image: url('IMG_5181.JPG'); opacity: 1; }
+.hero-slide:nth-child(1) { background-image: url('hero_bg.jpg'); opacity: 1; }
 .hero-slide:nth-child(2),
 .hero-slide:nth-child(3),
 .hero-slide:nth-child(4),
@@ -1708,11 +1708,11 @@ footer {
     <h2 class="section-h2 reveal" style="text-align:center;">See the <em>Magic</em></h2>
     <p class="section-lead reveal" style="text-align:center;max-width:500px;margin:0 auto 60px;">Real moments. Real reactions. This is what happens when the mirror meets the dance floor.</p>
     <div class="vc-wrapper" id="vcWrapper">
-      <div class="vc-slide"><video src="880c69f2-b02b-4dd1-aab4-69e34983cc6a.mp4" autoplay muted loop playsinline></video></div>
-      <div class="vc-slide"><video src="18b1ad3f-1231-42d2-af8a-30918c988c25.mp4" autoplay muted loop playsinline></video></div>
-      <div class="vc-slide"><video src="87a72384-f319-4791-b6f8-e7ba1c7ac018.mp4" autoplay muted loop playsinline></video></div>
-      <div class="vc-slide"><video src="d76caf6f-1cdc-459a-87f9-e502f977bfe4.mp4" autoplay muted loop playsinline></video></div>
-      <div class="vc-slide"><video src="577e169f-5b7b-4db7-a3a1-0b5f742fe142.mp4" autoplay muted loop playsinline></video></div>
+      <div class="vc-slide"><video src="880c69f2-b02b-4dd1-aab4-69e34983cc6a.mp4" muted loop playsinline preload="metadata"></video></div>
+      <div class="vc-slide"><video src="18b1ad3f-1231-42d2-af8a-30918c988c25.mp4" muted loop playsinline preload="none"></video></div>
+      <div class="vc-slide"><video src="87a72384-f319-4791-b6f8-e7ba1c7ac018.mp4" muted loop playsinline preload="none"></video></div>
+      <div class="vc-slide"><video src="d76caf6f-1cdc-459a-87f9-e502f977bfe4.mp4" muted loop playsinline preload="none"></video></div>
+      <div class="vc-slide"><video src="577e169f-5b7b-4db7-a3a1-0b5f742fe142.mp4" muted loop playsinline preload="none"></video></div>
     </div>
     <div class="vc-dots" id="vcDots"></div>
   </div>
@@ -1747,7 +1747,7 @@ footer {
 <section id="what">
   <div class="what-visual">
     <div class="what-mirror-wrap">
-      <div class="what-mirror" style="background-image:url('AC2563C5-098B-485F-9FE1-D69BD2AC2674.png');background-size:cover;background-position:center;border:none;">
+      <div class="what-mirror" style="background-image:url('what_mirror.jpg');background-size:cover;background-position:center;border:none;">
         <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.1),rgba(0,0,0,0.5));border-radius:inherit;"></div>
         <div class="what-screen" style="position:relative;z-index:2;">💫 Strike a Pose</div>
       </div>
@@ -1791,7 +1791,7 @@ footer {
         overflow:hidden;
         position:relative;
       ">
-        <img src="real_booth_dip_bw.jpg" alt="Couple dancing inside a mirror photo booth" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
+        <img src="real_booth_dip_bw.jpg" alt="Couple dancing inside a mirror photo booth" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
         <!-- Decorative corner -->
         <div style="position:absolute;top:16px;right:16px;width:40px;height:40px;border-top:2px solid var(--rose-gold);border-right:2px solid var(--rose-gold);border-radius:0 4px 0 0;opacity:0.5;"></div>
         <div style="position:absolute;bottom:16px;left:16px;width:40px;height:40px;border-bottom:2px solid var(--rose-gold);border-left:2px solid var(--rose-gold);border-radius:0 0 0 4px;opacity:0.5;"></div>
@@ -1887,7 +1887,7 @@ footer {
 
       <div class="reveal reveal-delay-2 recital-visual" style="position:relative;">
         <div style="aspect-ratio:3/4;border:1px solid var(--border);border-radius:16px;overflow:hidden;">
-          <img src="real_swing_confetti_lift.jpg" alt="Dancer lifted in celebration under a marquee at a real event" style="width:100%;height:100%;object-fit:cover;object-position:center 15%;">
+          <img src="real_swing_confetti_lift.jpg" alt="Dancer lifted in celebration under a marquee at a real event" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center 15%;">
         </div>
         <div style="position:absolute;bottom:-18px;left:-18px;background:linear-gradient(135deg,var(--rose-gold),var(--fuchsia));border-radius:12px;padding:16px 22px;box-shadow:0 12px 40px rgba(192,52,122,0.3);">
           <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:white;line-height:1;">Recital-Ready</div>
@@ -2439,11 +2439,20 @@ function handleSubmit() {
   let cur = 0;
   let timer;
 
-  // Force all videos to play (muted autoplay requires explicit play() in some browsers)
+  // Only the active video plays; the two adjacent (visible) slides buffer;
+  // the rest stay paused and unloaded. Keeps first paint at one video
+  // instead of downloading all five (~50MB) up front.
   function ensurePlaying() {
-    videos.forEach(v => {
+    videos.forEach((v, i) => {
       v.muted = true;
-      if (v.paused) v.play().catch(() => {});
+      const pos = ((i - cur + n) % n);
+      const visible = pos === 0 || pos === 1 || pos === n - 1;
+      if (pos === 0) {
+        if (v.paused) v.play().catch(() => {});
+      } else {
+        if (visible && v.preload === 'none') v.preload = 'metadata';
+        if (!v.paused) v.pause();
+      }
     });
   }
 
