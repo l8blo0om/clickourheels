@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://clickourheels.com/sitemap.xml
