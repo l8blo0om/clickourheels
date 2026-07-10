@@ -1055,6 +1055,14 @@ section { padding: 100px 6%; }
   bottom: 20px;
   right: 20px;
   z-index: 9999;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+/* Fade the floating button while the page is actively scrolling so it
+   never sits opaque on top of text the user is mid-reading; it snaps
+   back to full strength as soon as scrolling stops. */
+.sp-player.is-scrolling {
+  opacity: 0.35;
+  transform: scale(0.92);
 }
 .sp-toggle {
   /* Hue drifts within the brand's warm range only — rose-gold (~25°) through fuchsia (~330°) — never into green/blue/cyan */
@@ -1536,9 +1544,16 @@ footer {
   #promo-bar { padding: 0 34px 0 12px; gap: 0; flex-wrap: nowrap; justify-content: flex-start; }
   #promo-bar span { font-size: 0.58rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 8px; }
   #promo-bar a { display: none; }
-  /* Hero */
-  .hero-h1 { font-size: 2rem; }
+  /* Hero — stays the biggest, boldest moment on the page */
+  .hero-h1 { font-size: 2.35rem; }
   .hero-sub { font-size: 0.85rem; }
+  /* Section headlines drop clearly below hero size so the hero reads as the
+     one big statement and every section below reads as supporting content,
+     not a repeat of the same shout. */
+  .section-h2 { font-size: 1.5rem; }
+  .section-label { font-size: 0.6rem; margin-bottom: 10px; }
+  .section-lead { font-size: 0.88rem; }
+  section { padding: 64px 6%; }
   /* Packages / form */
   .packages-grid { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
@@ -2269,6 +2284,17 @@ function crMove(dir) {
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
 });
+
+// ─── FADE FLOATING MUSIC BUTTON WHILE SCROLLING ───
+// Prevents it sitting fully opaque on top of text mid-read; snaps back once scrolling stops.
+let scrollFadeTimer;
+window.addEventListener('scroll', () => {
+  const player = document.getElementById('spPlayer');
+  if (!player) return;
+  player.classList.add('is-scrolling');
+  clearTimeout(scrollFadeTimer);
+  scrollFadeTimer = setTimeout(() => player.classList.remove('is-scrolling'), 500);
+}, { passive: true });
 
 // ─── MOBILE MENU ───
 function toggleMenu() {
