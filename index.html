@@ -1534,6 +1534,10 @@ footer {
   .gallery-cell.tall { grid-row: span 1; }
   /* About section — collapse 2-col inline grid */
   #about > div { grid-template-columns: 1fr !important; gap: 40px !important; }
+  /* Recitals section — stack, image first for impact */
+  .recital-grid { grid-template-columns: 1fr !important; gap: 44px !important; }
+  .recital-visual { order: -1; max-width: 340px; margin: 0 auto; }
+  .stat-strip { margin-top: 60px !important; gap: 18px !important; }
   .why-grid { grid-template-columns: 1fr !important; }
   .about-visual { overflow: visible !important; }
 }
@@ -1629,8 +1633,8 @@ footer {
   <a href="#" class="nav-logo" style="font-family:'Dancing Script',cursive;font-size:1.65rem;color:var(--rose-gold);text-decoration:none;letter-spacing:0.02em;">Click Our Heels</a>
   <ul class="nav-links">
     <li><a href="#what">The Experience</a></li>
+    <li><a href="#recitals">For Studios</a></li>
     <li><a href="#packages">Packages</a></li>
-    <li><a href="#testimonials">Reviews</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#contact" class="nav-cta">Book Now</a></li>
   </ul>
@@ -1658,8 +1662,8 @@ footer {
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" onclick="toggleMenu()">✕</button>
   <a href="#what" onclick="toggleMenu()">The Experience</a>
+  <a href="#recitals" onclick="toggleMenu()">For Studios</a>
   <a href="#packages" onclick="toggleMenu()">Packages</a>
-  <a href="#testimonials" onclick="toggleMenu()">Reviews</a>
   <a href="#faq" onclick="toggleMenu()">FAQ</a>
   <a href="#contact" onclick="toggleMenu()">Book Now</a>
 </div>
@@ -1678,10 +1682,10 @@ footer {
   <div class="hero-content">
     <p class="hero-eyebrow">Mirror Photo Booth Rentals · Charlotte, NC</p>
     <h1 class="hero-h1"><em>Forever</em><br>Your Moment.</h1>
-    <p class="hero-sub">Charlotte's dance community — salsa socials, ballroom competitions, recitals, galas — finally has a photo experience built for it. Step up to the mirror. See yourself. Walk away with something you're proud to share.</p>
+    <p class="hero-sub">A full-length mirror photo booth built for the dance world — recitals, competitions, socials, and galas. Your dancers step up in costume and walk away with a professional keepsake, printed and on their phone before the night ends.</p>
     <div class="hero-ctas">
       <a href="#contact" class="btn-primary">✨ Book Your Event</a>
-      <a href="#what" class="btn-secondary">See How It Works</a>
+      <a href="#recitals" class="btn-secondary">Planning a Recital?</a>
     </div>
   </div>
 
@@ -1787,7 +1791,7 @@ footer {
         overflow:hidden;
         position:relative;
       ">
-        <img src="IMG_4767.JPG" alt="Click Our Heels" style="width:100%;height:100%;object-fit:cover;object-position:8% center;border-radius:inherit;">
+        <img src="real_booth_dip_bw.jpg" alt="Couple dancing inside a mirror photo booth" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
         <!-- Decorative corner -->
         <div style="position:absolute;top:16px;right:16px;width:40px;height:40px;border-top:2px solid var(--rose-gold);border-right:2px solid var(--rose-gold);border-radius:0 4px 0 0;opacity:0.5;"></div>
         <div style="position:absolute;bottom:16px;left:16px;width:40px;height:40px;border-bottom:2px solid var(--rose-gold);border-left:2px solid var(--rose-gold);border-radius:0 0 0 4px;opacity:0.5;"></div>
@@ -1827,7 +1831,7 @@ footer {
   <div style="max-width:1100px;margin:0 auto;">
     <p class="section-label reveal" style="text-align:center;">Our Edge</p>
     <h2 class="section-h2 reveal" style="text-align:center;">Why the <em>Dance World?</em></h2>
-    <p class="section-lead reveal" style="text-align:center;max-width:600px;margin:0 auto 60px;">Four reasons no other photo booth company has figured this out yet.</p>
+    <p class="section-lead reveal" style="text-align:center;max-width:600px;margin:0 auto 60px;">A mirror photo booth built specifically for how dance events actually work.</p>
     <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:32px;" class="why-grid">
       <div class="reveal reveal-delay-1" style="background:var(--deep);border:1px solid var(--border);border-radius:16px;padding:36px;">
         <div style="font-size:2rem;margin-bottom:16px;">👗</div>
@@ -1852,6 +1856,60 @@ footer {
         <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--rose-gold);margin-bottom:10px;">04 — The Gap</div>
         <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--champagne);margin-bottom:12px;">No one is doing this. We are.</h3>
         <p style="font-size:0.88rem;color:var(--champagne);opacity:0.75;line-height:1.7;">No photo booth company is specifically targeting the dance market. This niche is wide open. We speak the language because we ARE dancers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOR RECITALS & STUDIOS ─── -->
+<section id="recitals" style="background:var(--deep);">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;" class="recital-grid">
+
+      <div class="reveal">
+        <p class="section-label">For Dance Studios</p>
+        <h2 class="section-h2">Make Recital Night<br><em>Unforgettable</em></h2>
+        <p style="font-size:0.95rem;line-height:1.8;color:var(--champagne);opacity:0.85;margin-bottom:28px;">
+          Your dancers spend months rehearsing and hundreds of dollars on costumes — and most families leave recital night with nothing but a blurry phone photo. Put the mirror in your lobby and every family walks out with a professional, studio-branded keepsake.
+        </p>
+        <ul class="feature-list" style="margin-bottom:36px;">
+          <li>Studio-branded 2×6 print strips — your logo goes home on every fridge</li>
+          <li>We handle everything: delivery, setup, attendant, and teardown</li>
+          <li>Families get every photo by text within seconds — shareable that night</li>
+          <li>Fundraiser option: turn the booth into revenue for your studio</li>
+          <li>Fully insured, recital-lobby friendly footprint</li>
+        </ul>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;">
+          <a href="#contact" class="btn-primary">Book Your Recital Date</a>
+          <a href="ClickOurHeels_Pitch_Deck.pptx" class="btn-secondary" target="_blank" rel="noopener">Studio Pitch Deck ↓</a>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-2 recital-visual" style="position:relative;">
+        <div style="aspect-ratio:3/4;border:1px solid var(--border);border-radius:16px;overflow:hidden;">
+          <img src="real_swing_confetti_lift.jpg" alt="Dancer lifted in celebration under a marquee at a real event" style="width:100%;height:100%;object-fit:cover;object-position:center 15%;">
+        </div>
+        <div style="position:absolute;bottom:-18px;left:-18px;background:linear-gradient(135deg,var(--rose-gold),var(--fuchsia));border-radius:12px;padding:16px 22px;box-shadow:0 12px 40px rgba(192,52,122,0.3);">
+          <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:white;line-height:1;">Recital-Ready</div>
+          <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.85);margin-top:4px;">Setup 90 min before doors</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Stat strip -->
+    <div class="stat-strip reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:90px;text-align:center;">
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:900;color:var(--rose-gold);line-height:1;">77%</div>
+        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--champagne);opacity:0.7;margin-top:10px;line-height:1.6;">of dancers wish they had<br>better photos from events</div>
+      </div>
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:900;color:var(--rose-gold);line-height:1;">3×</div>
+        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--champagne);opacity:0.7;margin-top:10px;line-height:1.6;">more social shares than a<br>standard photo booth</div>
+      </div>
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:900;color:var(--rose-gold);line-height:1;">100%</div>
+        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--champagne);opacity:0.7;margin-top:10px;line-height:1.6;">of costumes deserve to be<br>seen head to heel</div>
       </div>
     </div>
   </div>
@@ -2040,20 +2098,20 @@ footer {
 <!-- ─── GALLERY ─── -->
 <section id="gallery">
   <p class="section-label reveal" style="justify-content:center;">From the Floor</p>
-  <h2 class="section-h2 reveal">See It <em>In Action</em></h2>
-  <p class="section-lead reveal">Photos coming soon — follow us on Instagram for the latest looks from our events.</p>
+  <h2 class="section-h2 reveal">Real Nights. <em>Real Moments.</em></h2>
+  <p class="section-lead reveal" style="margin-left:auto;margin-right:auto;">Shot at real dance events — this is the energy your guests walk into.</p>
 
   <div class="gallery-grid reveal">
-    <div class="gallery-cell tall" style="background-image:url('C65C7DE2-1272-47C7-9253-2E7ED34CC0B5.png');background-size:cover;background-position:center;background-color:#f5f0e8;">
-      <div class="gallery-label">The Mirror</div>
+    <div class="gallery-cell tall" style="background-image:url('real_swing_night_spin.jpg');background-size:cover;background-position:center;">
+      <div class="gallery-label">Swing Night</div>
     </div>
-    <div class="gallery-cell" style="background-image:url('EB13E074-B3DE-4256-8C4C-6C8A4389C55F.png');background-size:cover;background-position:center top;"></div>
-    <div class="gallery-cell" style="background-image:url('8A43EFE8-4D57-4380-96C7-33536543A573.png');background-size:cover;background-position:center;"></div>
-    <div class="gallery-cell tall" style="grid-column:4;background-image:url('IMG_5181.JPG');background-size:cover;background-position:center;">
-      <div class="gallery-label">Competition Ready</div>
+    <div class="gallery-cell" style="background-image:url('real_swing_confetti_lift.jpg');background-size:cover;background-position:center 20%;"></div>
+    <div class="gallery-cell" style="background-image:url('real_swing_marquee_color.jpg');background-size:cover;background-position:center 30%;"></div>
+    <div class="gallery-cell tall" style="grid-column:4;background-image:url('real_booth_dip_bw.jpg');background-size:cover;background-position:center;">
+      <div class="gallery-label">The Booth</div>
     </div>
-    <div class="gallery-cell" style="background-image:url('825062CB-015A-4E6E-9842-12BEEB94516E.png');background-size:cover;background-position:center;"></div>
-    <div class="gallery-cell" style="background-image:url('11F4AD95-73FC-478E-B6D3-2E2BC1D61494.png');background-size:cover;background-position:center;"></div>
+    <div class="gallery-cell" style="background-image:url('real_swing_bw_lift.jpg');background-size:cover;background-position:center 25%;"></div>
+    <div class="gallery-cell" style="background-image:url('real_swing_soul_couple.jpg');background-size:cover;background-position:center 30%;"></div>
   </div>
 
   <a href="https://instagram.com/clickourheels" class="btn-secondary" target="_blank" rel="noopener" style="margin:0 auto;display:inline-flex;">
@@ -2064,48 +2122,27 @@ footer {
 <!-- ─── TESTIMONIALS ─── -->
 <section id="testimonials">
   <div class="text-center reveal">
-    <p class="section-label">What Studios Are Saying</p>
-    <h2 class="section-h2">The <em>Reviews</em> Are In</h2>
+    <p class="section-label">Picture Your Event</p>
+    <h2 class="section-h2">How It <em>Plays Out</em></h2>
   </div>
 
   <div class="testi-grid">
     <div class="testi-card reveal reveal-delay-1">
-      <div class="testi-quote">"</div>
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">Our recital lobby was completely transformed. Parents were lined up the whole night and the kids absolutely loved seeing themselves on the big mirror. The prints with our studio logo were the perfect keepsake.</p>
-      <div class="testi-author">
-        <div class="testi-avatar">💃</div>
-        <div>
-          <div class="testi-name">Studio Director, Charlotte</div>
-          <div class="testi-role">Dance Academy · Annual Recital</div>
-        </div>
-      </div>
+      <div class="testi-avatar" style="margin-bottom:16px;">💃</div>
+      <div class="testi-name" style="margin-bottom:10px;">Recital Night</div>
+      <p class="testi-text">The mirror goes up in your lobby before doors open. At intermission, families line up — kids still in costume, hair and makeup done. Every family walks out with a studio-branded print strip and the digital photos already on their phone.</p>
     </div>
 
     <div class="testi-card reveal reveal-delay-2">
-      <div class="testi-quote">"</div>
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">Booked Click Our Heels for our competition send-off party and it was the highlight of the night. Setup was so fast and the attendant kept the energy going the entire time. We'll be booking again this season.</p>
-      <div class="testi-author">
-        <div class="testi-avatar">🏆</div>
-        <div>
-          <div class="testi-name">Competitive Team Mom</div>
-          <div class="testi-role">Charlotte Dance Collective · Team Party</div>
-        </div>
-      </div>
+      <div class="testi-avatar" style="margin-bottom:16px;">🏆</div>
+      <div class="testi-name" style="margin-bottom:10px;">Competition Day</div>
+      <p class="testi-text">Between heats, dancers capture the costume, the number, and the nerves-turned-confidence — full length, head to heel. The team photo at the end of the day becomes the one everyone posts.</p>
     </div>
 
     <div class="testi-card reveal reveal-delay-3">
-      <div class="testi-quote">"</div>
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">I was nervous about logistics in our venue but they handled everything seamlessly. The digital gallery was ready the next morning and our families couldn't stop sharing. 100% recommend for any dance event.</p>
-      <div class="testi-author">
-        <div class="testi-avatar">🩰</div>
-        <div>
-          <div class="testi-name">Studio Owner</div>
-          <div class="testi-role">Premier Dance Studio · Year-End Showcase</div>
-        </div>
-      </div>
+      <div class="testi-avatar" style="margin-bottom:16px;">🪩</div>
+      <div class="testi-name" style="margin-bottom:10px;">Social Night</div>
+      <p class="testi-text">The booth becomes part of the party — GIFs and boomerangs between songs, group shots that fill the frame, and a stream of tagged posts that market your next event for you.</p>
     </div>
   </div>
 </section>
@@ -2221,9 +2258,9 @@ footer {
     <div class="footer-links-col">
       <div class="footer-col-title">Explore</div>
       <a href="#what">The Experience</a>
+      <a href="#recitals">For Studios</a>
       <a href="#packages">Packages</a>
       <a href="#gallery">Gallery</a>
-      <a href="#testimonials">Reviews</a>
     </div>
     <div class="footer-links-col">
       <div class="footer-col-title">Connect</div>
@@ -2236,9 +2273,9 @@ footer {
   <div class="footer-bottom">
     <p class="footer-copy">© 2025 Click Our Heels · Charlotte, NC · All rights reserved</p>
     <div class="footer-social">
-      <a href="https://instagram.com/clickourheels" target="_blank" rel="noopener" title="Instagram">📸</a>
-      <a href="#" title="Facebook">💬</a>
-      <a href="#" title="TikTok">🎵</a>
+      <a href="https://instagram.com/clickourheels" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>
+      </a>
     </div>
   </div>
 </footer>
