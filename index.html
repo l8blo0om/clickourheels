@@ -2271,7 +2271,7 @@ footer {
     </div>
   </div>
   <div class="footer-bottom">
-    <p class="footer-copy">© 2025 Click Our Heels · Charlotte, NC · All rights reserved</p>
+    <p class="footer-copy">© 2025 Click Our Heels · Charlotte, NC · All rights reserved<span id="visitCount"></span></p>
     <div class="footer-social">
       <a href="https://instagram.com/clickourheels" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>
@@ -2536,5 +2536,20 @@ function googleTranslateElementInit() {
 }
 </script>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<!-- ─── VISIT COUNTER (GoatCounter — free, no cookies) ─── -->
+<script data-goatcounter="https://clickourheels.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+// Small visit count in the footer; hidden entirely until the GoatCounter
+// account exists and has data, so it never shows an error or a zero.
+fetch('https://clickourheels.goatcounter.com/counter//.json')
+  .then(r => r.ok ? r.json() : null)
+  .then(d => {
+    if (d && d.count) {
+      document.getElementById('visitCount').textContent = ' · ' + d.count.trim() + ' visits';
+    }
+  })
+  .catch(() => {});
+</script>
 </body>
 </html>
