@@ -1088,6 +1088,50 @@ section { padding: 100px 6%; }
 .sp-toggle .icon-pause { display: none; }
 .sp-toggle.playing .icon-play { display: none; }
 .sp-toggle.playing .icon-pause { display: block; }
+
+/* ─── GLOW EFFECTS ─── */
+/* Glowing button that breathes with the hue animation */
+.btn-glow {
+  background: #0a0a0a;
+  color: var(--champagne);
+  border: none;
+  padding: 15px 28px;
+  border-radius: 40px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 0 0 1.5px hsl(var(--hue) 60% 65%), 0 0 22px hsl(var(--hue) 60% 60% / .3);
+  animation: breathe 3s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+.btn-glow:hover {
+  background: hsl(var(--hue) 60% 60%);
+  color: #0a0a0a;
+  box-shadow: 0 0 0 2px hsl(var(--hue) 60% 65%), 0 0 28px hsl(var(--hue) 60% 60% / .5);
+  transform: translateY(-2px);
+}
+@keyframes breathe {
+  0%,100% {
+    box-shadow: 0 0 0 1.5px hsl(var(--hue) 60% 65%), 0 0 18px hsl(var(--hue) 60% 60% / .25);
+  }
+  50% {
+    box-shadow: 0 0 0 1.5px hsl(var(--hue) 60% 65%), 0 0 32px hsl(var(--hue) 60% 60% / .5);
+  }
+}
+
+/* Glowing hairline accent (like header border) */
+.glow-line {
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(90deg, hsl(var(--hue) 60% 65%), hsl(calc(var(--hue) + 60) 60% 65%), hsl(var(--hue) 60% 65%)) 1;
+}
+
+/* Accent text that glows with the hue cycle */
+.accent {
+  color: hsl(var(--hue) 65% 62%);
+}
+
 @media (max-width: 900px) {
   .vc-wrapper { height: 420px; }
   .vc-slide { width: 54%; }
@@ -1576,6 +1620,25 @@ footer {
   }
   #about .about-visual > div:last-child > div:first-child { font-size: 1.2rem !important; }
 }
+
+/* glowing outlined button that breathes */
+.btn-glow{
+  background:#0a0a0a;color:#fff;border:none;padding:15px 28px;cursor:pointer;
+  box-shadow:0 0 0 1.5px hsl(var(--hue) 90% 60%), 0 0 22px hsl(var(--hue) 90% 58% / .3);
+  animation:breathe 3s ease-in-out infinite;
+}
+.btn-glow:hover{background:hsl(var(--hue) 90% 58%);color:#0a0a0a}
+@keyframes breathe{
+  0%,100%{box-shadow:0 0 0 1.5px hsl(var(--hue) 90% 60%), 0 0 18px hsl(var(--hue) 90% 58% / .25)}
+  50%   {box-shadow:0 0 0 1.5px hsl(var(--hue) 90% 60%), 0 0 32px hsl(var(--hue) 90% 58% / .5)}
+}
+
+/* glowing hairline (like the header border) */
+.glow-line{border-bottom:2px solid transparent;
+  border-image:linear-gradient(90deg,hsl(var(--hue) 90% 60%),hsl(calc(var(--hue) + 60) 90% 60%),hsl(var(--hue) 90% 60%)) 1}
+
+/* accent text (eyebrows, highlights) */
+.accent{color:hsl(var(--hue) 90% 62%)}
 </style>
 </head>
 <body>
@@ -1882,7 +1945,7 @@ footer {
         </ul>
         <div style="display:flex;gap:14px;flex-wrap:wrap;">
           <a href="#contact" class="btn-primary">Book Your Recital Date</a>
-          <a href="ClickOurHeels_Pitch_Deck.pptx" class="btn-secondary" target="_blank" rel="noopener">Studio Pitch Deck ↓</a>
+          <a href="ClickOurHeels_Pitch_Deck.pptx" class="btn-glow" target="_blank" rel="noopener">Studio Pitch Deck ↓</a>
         </div>
       </div>
 
